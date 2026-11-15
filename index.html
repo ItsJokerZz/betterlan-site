@@ -5,30 +5,37 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BetterLAN</title>
 <meta name="description" content="BetterLAN: System Link over the internet for PS4 and PS5.">
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/betterlan-site/favicon.png">
+<link rel="apple-touch-icon" href="/betterlan-site/apple-touch-icon.png">
+<meta name="theme-color" content="#080a0f">
 <meta property="og:title" content="BetterLAN">
 <meta property="og:description" content="Who is online and playing on the BetterLAN relay.">
-<meta property="og:image" content="brand/bn.png">
-<meta http-equiv="refresh" content="1;url=https://pi-ubuntu.tail5429b.ts.net/">
-<script>
-  // Forward to the dashboard, keeping ?t=... and #page so admin links still work.
-  var target = "https://pi-ubuntu.tail5429b.ts.net/";
-  location.replace(target + location.search + location.hash);
-</script>
+<meta property="og:image" content="https://itsjokerzz.github.io/betterlan-site/brand/bn.png">
 <style>
-  html,body{height:100%;margin:0}
-  body{display:grid;place-items:center;background:#080a0f;color:#b0b7c3;font:15px/1.5 system-ui,sans-serif;
-    background-image:radial-gradient(40% 35% at 70% 10%,rgba(110,130,255,.22),transparent 70%)}
-  main{text-align:center}
-  img{width:min(320px,80vw);height:auto;filter:drop-shadow(0 8px 24px rgba(40,120,255,.35))}
-  a{color:#8aa2ff}
+  html,body{height:100%;margin:0;background:#080a0f}
+  iframe{position:fixed;inset:0;width:100%;height:100%;border:0;display:block;background:#080a0f}
+  .fallback{position:fixed;inset:0;display:grid;place-items:center;color:#b0b7c3;
+    font:15px/1.5 system-ui,sans-serif;text-align:center;z-index:-1}
+  .fallback img{width:min(320px,80vw);height:auto;filter:drop-shadow(0 8px 24px rgba(40,120,255,.35))}
+  .fallback a{color:#8aa2ff}
 </style>
 </head>
 <body>
-<main>
-  <img src="brand/logo-word.png" alt="BetterLAN">
-  <p>Opening the dashboard… <a href="https://pi-ubuntu.tail5429b.ts.net/">continue</a></p>
-</main>
+<div class="fallback">
+  <div><img src="/betterlan-site/brand/logo-word.png" alt="BetterLAN">
+  <p>Loading the dashboard… <a id="direct" href="https://pi-ubuntu.tail5429b.ts.net/">open it directly</a></p></div>
+</div>
+<script>
+  // The dashboard, shown in place so this address stays in the bar. Anything
+  // after the address (?t=key, #page) is handed on to it.
+  var target = "https://pi-ubuntu.tail5429b.ts.net/";
+  var f = document.createElement("iframe");
+  f.src = target + location.search + location.hash;
+  f.title = "BetterLAN";
+  f.allow = "clipboard-write";
+  document.body.appendChild(f);
+  document.getElementById("direct").href = f.src;
+</script>
+<noscript><meta http-equiv="refresh" content="0;url=https://pi-ubuntu.tail5429b.ts.net/"></noscript>
 </body>
 </html>

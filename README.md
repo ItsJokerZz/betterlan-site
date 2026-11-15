@@ -1,5 +1,5 @@
 # BetterLAN
 
-Forwards to the BetterLAN dashboard: https://pi-ubuntu.tail5429b.ts.net/
+Shows the BetterLAN dashboard (https://pi-ubuntu.tail5429b.ts.net/) at this address.
 
 `brand/bn.png` is the icon BetterLAN shows in console notifications.

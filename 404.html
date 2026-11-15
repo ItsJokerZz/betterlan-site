@@ -29,8 +29,21 @@
   // The dashboard, shown in place so this address stays in the bar. Anything
   // after the address (?t=key, #page) is handed on to it.
   var target = "https://pi-ubuntu.tail5429b.ts.net/";
+  // Your admin key: given once as ?t=..., kept in this browser only (never in
+  // this site's files), and passed on after that. ?forget clears it.
+  var q = new URLSearchParams(location.search), key = q.get("t");
+  try {
+    if (q.has("forget")) { localStorage.removeItem("betterlan_t"); key = null; }
+    else if (key) localStorage.setItem("betterlan_t", key);
+    else key = localStorage.getItem("betterlan_t");
+  } catch (e) {}
+  q.delete("forget");
+  if (key) q.set("t", key);
+  var rest = q.toString();
+  // tidy the address bar: the key need not sit there once it is remembered
+  if (location.search) history.replaceState(null, "", location.pathname + location.hash);
   var f = document.createElement("iframe");
-  f.src = target + location.search + location.hash;
+  f.src = target + (rest ? "?" + rest : "") + location.hash;
   f.title = "BetterLAN";
   f.allow = "clipboard-write";
   document.body.appendChild(f);

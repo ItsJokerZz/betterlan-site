@@ -53,6 +53,15 @@
   f.allow = "clipboard-write";
   document.body.appendChild(f);
   document.getElementById("direct").href = f.src;
+  // The dashboard can hand this browser a key of its own (an admin gave this
+  // device one, or it was signed in from inside the frame): keep it here, the
+  // same as a ?t= link, and reload with it. Only from the dashboard itself.
+  addEventListener("message", function (e) {
+    var k = e.origin === target.replace(/\/$/, "") && e.data && e.data.betterlanKey;
+    if (!k || !/^[0-9a-f]{32}$/.test(k)) return;
+    try { localStorage.setItem("betterlan_t", k); } catch (x) {}
+    location.replace(location.pathname + "?t=" + k + location.hash);
+  });
 </script>
 <noscript><meta http-equiv="refresh" content="0;url=https://pi-ubuntu.tail5429b.ts.net/"></noscript>
 </body>
